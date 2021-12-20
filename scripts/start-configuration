@@ -108,7 +108,7 @@ log "Resolving type given ${TYPE}"
 case "${TYPE^^}" in
   *BUKKIT|SPIGOT)
     exec ${SCRIPTS:-/}start-deployBukkitSpigot "$@"
-  ;;
+  ;;z
 
   PAPER)
     exec ${SCRIPTS:-/}start-deployPaper "$@"

@@ -136,7 +136,7 @@ resolve_versions
 
 installMarker="/data/.forge-installed-$shortForgeVersion"
 
-if [ ! -e "$installMarker" ] || isTrue "${FORCE_REINSTALL:-false}"; then
+if [ ! -e "$installMarker" ] || isTrue "${FORCE_REDOWNLOAD:-false}"; then
   install
 else
   SERVER=$(cat "$installMarker")

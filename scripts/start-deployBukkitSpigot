@@ -71,7 +71,6 @@ function downloadSpigot {
     fi
   fi
 
-  setServerVar
   if [ -f $SERVER ]; then
     # tell curl to only download when newer
     curlArgs="-z $SERVER"
@@ -116,13 +115,14 @@ function setServerVar {
   esac
 }
 
-if isTrue "$BUILD_SPIGOT_FROM_SOURCE" || isTrue "$BUILD_FROM_SOURCE"; then
-  setServerVar
-  if [ ! -f $SERVER ] || [ -n "$FORCE_REDOWNLOAD" ]; then
+setServerVar
+
+if [ ! -f "$SERVER" ] || isTrue "$FORCE_REDOWNLOAD"; then
+  if isTrue "$BUILD_SPIGOT_FROM_SOURCE" || isTrue "$BUILD_FROM_SOURCE"; then
     buildSpigotFromSource
+  else
+    downloadSpigot
   fi
-else
-  downloadSpigot
 fi
 
 # Normalize on Spigot for operations below
